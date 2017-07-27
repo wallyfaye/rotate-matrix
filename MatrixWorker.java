@@ -10,50 +10,35 @@ class MatrixWorker{
 		this.matrix_size = matrix_size;
 		this.height = this.matrix_size;
 		this.width = this.matrix_size;
-		this.matrix2d = new int[matrix_size][matrix_size];
+		this.matrix2d = new int[this.height][this.width];
 		this.build();
 	}
 
 	public void rotate(){
+
 		int cache_array_size = this.matrix_size - 1;
 		int[] cache = new int[cache_array_size];
 
 		// top
 		for(int i = 0; i < cache_array_size; i++){
-			int array_item = this.matrix2d[0][i];
-			System.out.println(array_item);
-//			cache[i] = this.matrix2d[0][i];
+			cache[i] = this.matrix2d[0][i];
+			this.matrix2d[0][i] = this.matrix2d[i][cache_array_size];
 		}
-
-			System.out.println("");
 
 		// right
 		for(int i = 0; i < cache_array_size; i++){
-			int array_item = this.matrix2d[cache_array_size][i];
-			System.out.println(array_item);
-//			this.matrix2d[0][i] = this.matrix2d[cache_array_size][i];
+			this.matrix2d[i][cache_array_size] = this.matrix2d[cache_array_size][cache_array_size - i];
 		}
-
-			System.out.println("");
 
 		// bottom
 		for(int i = 0; i < cache_array_size; i++){
-			int array_item = this.matrix2d[cache_array_size - i][cache_array_size];
-			System.out.println(array_item);
+			this.matrix2d[cache_array_size][cache_array_size - i] = this.matrix2d[cache_array_size - i][0];
 		}
 
-			System.out.println("");
-
-		// left
+		// right
 		for(int i = 0; i < cache_array_size; i++){
-			int array_item = this.matrix2d[0][cache_array_size - i];
-			System.out.println(array_item);
+			this.matrix2d[cache_array_size - i][0] = cache[i];
 		}
-
-			System.out.println("");
-
-
-
 
 	}
 
@@ -63,7 +48,7 @@ class MatrixWorker{
 
                         for(int w = 0; w < this.width; w++){
 
-                                int val = h + w;
+                                int val = h;
                                 this.matrix2d[h][w] = val;
 
                         }
