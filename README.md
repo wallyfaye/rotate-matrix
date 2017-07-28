@@ -1,3 +1,7 @@
 # Rotate Matrix 
-Rotate an NxN matrix 90 degrees, where each pixel is 4 bytes
+Generates an NxN matrix and rotates it 90 degrees
 
+## Usage
+See contents of `run.sh` or use:
+>
+    sh run.sh 8
