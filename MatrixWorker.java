@@ -16,28 +16,33 @@ class MatrixWorker{
 
 	public void rotate(){
 
-		int cache_array_size = this.matrix_size - 1;
-		int[] cache = new int[cache_array_size];
+		for(int l = 0; l < matrix_size/2; l++){
 
-		// top
-		for(int i = 0; i < cache_array_size; i++){
-			cache[i] = this.matrix2d[0][i];
-			this.matrix2d[0][i] = this.matrix2d[i][cache_array_size];
-		}
+			int full_cache_array_size = this.matrix_size - 1;
+			
+			int cache_array_size = full_cache_array_size - (l * 2);
+			int[] cache = new int[cache_array_size];
 
-		// right
-		for(int i = 0; i < cache_array_size; i++){
-			this.matrix2d[i][cache_array_size] = this.matrix2d[cache_array_size][cache_array_size - i];
-		}
+			// top
+			for(int i = 0; i < cache_array_size; i++){
+				cache[i] = this.matrix2d[l][i  + l];
+				this.matrix2d[l][i + l] = this.matrix2d[i + l][full_cache_array_size - l];
+			}
 
-		// bottom
-		for(int i = 0; i < cache_array_size; i++){
-			this.matrix2d[cache_array_size][cache_array_size - i] = this.matrix2d[cache_array_size - i][0];
-		}
+			// right
+			for(int i = 0; i < cache_array_size; i++){
+				this.matrix2d[i + l][full_cache_array_size - l] = this.matrix2d[full_cache_array_size - l][full_cache_array_size - i - l];
+			}
 
-		// right
-		for(int i = 0; i < cache_array_size; i++){
-			this.matrix2d[cache_array_size - i][0] = cache[i];
+			// bottom
+			for(int i = 0; i < cache_array_size; i++){
+				this.matrix2d[full_cache_array_size - l][full_cache_array_size - i - l] = this.matrix2d[full_cache_array_size - i - l][l];
+			}
+
+			// right
+			for(int i = 0; i < cache_array_size; i++){
+				this.matrix2d[full_cache_array_size - i - l][l] = cache[i];
+			}
 		}
 
 	}
