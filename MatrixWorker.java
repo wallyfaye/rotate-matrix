@@ -23,31 +23,18 @@ class MatrixWorker{
 			int cache_array_size = full_cache_array_size - (l * 2);
 			int[] cache = new int[cache_array_size];
 
-			// top
 			for(int i = 0; i < cache_array_size; i++){
 				cache[i] = this.matrix2d[l][i  + l];
 				this.matrix2d[l][i + l] = this.matrix2d[i + l][full_cache_array_size - l];
-			}
-
-			// right
-			for(int i = 0; i < cache_array_size; i++){
 				this.matrix2d[i + l][full_cache_array_size - l] = this.matrix2d[full_cache_array_size - l][full_cache_array_size - i - l];
-			}
-
-			// bottom
-			for(int i = 0; i < cache_array_size; i++){
 				this.matrix2d[full_cache_array_size - l][full_cache_array_size - i - l] = this.matrix2d[full_cache_array_size - i - l][l];
-			}
-
-			// right
-			for(int i = 0; i < cache_array_size; i++){
 				this.matrix2d[full_cache_array_size - i - l][l] = cache[i];
 			}
 		}
 
 	}
 
-	public void build(){
+	private void build(){
 
                 for(int h = 0; h < this.height; h++){
 
